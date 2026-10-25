@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mahmoud Naoum — I will track your growth</title>
+<meta name="description" content="Mahmoud Naoum integrates PostHog, maintains it, and uses the data to track growth next to your ad spend." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,560;1,6..72,450;1,6..72,560&display=swap" rel="stylesheet" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2311140e'/%3E%3Crect x='6' y='22' width='4' height='4' fill='%23dff25a'/%3E%3Crect x='12' y='16' width='4' height='10' fill='%23e7e1d1'/%3E%3Crect x='18' y='10' width='4' height='16' fill='%23e7e1d1'/%3E%3C/svg%3E" />
+<style>
+  :root {
+    --bg: #10130e;
+    --ink: #f3ecdc;
+    --muted: #a39884;
+    --line: rgba(243, 236, 220, 0.16);
+    --signal: #e4ff57;
+    --signal-ink: #172006;
+    --paper: #f4efe4;
+    --paper-ink: #1a1812;
+    --card: #181c14;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(820px 420px at 90% -8%, rgba(228, 255, 87, 0.14), transparent 50%),
+      var(--bg);
+    color: var(--ink);
+    font-family: Newsreader, Palatino, serif;
+    font-optical-sizing: auto;
+    line-height: 1.45;
+  }
+  a { color: inherit; }
+  ::selection { background: var(--signal); color: var(--signal-ink); }
+  .wrap { width: min(1140px, calc(100% - 36px)); margin: 0 auto; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+
+  .bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 0;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .bar nav { display: flex; gap: 18px; color: var(--muted); }
+  .bar a { text-decoration: none; }
+  .bar a:hover { color: var(--signal); }
+  .hire {
+    background: var(--signal);
+    color: var(--signal-ink);
+    text-decoration: none;
+    padding: 10px 14px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .hire:hover { filter: brightness(1.05); }
+
+  h1 {
+    margin: 18px 0 0;
+    font-weight: 560;
+    font-size: clamp(3.4rem, 8.4vw, 7.1rem);
+    letter-spacing: -0.045em;
+    line-height: 0.88;
+  }
+  h1 em { font-style: italic; font-weight: 450; color: var(--signal); }
+  .lede {
+    max-width: 40rem;
+    margin: 26px 0 0;
+    font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+    line-height: 1.28;
+  }
+  .promises {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin: 42px 0 0;
+    border-top: 1px solid var(--line);
+  }
+  .promises a, .promises div {
+    padding: 18px 16px 20px 0;
+    border-right: 1px solid var(--line);
+    text-decoration: none;
+  }
+  .promises a:last-child { border-right: 0; }
+  .promises strong {
+    display: block;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--signal);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .promises span { font-size: 1.12rem; }
+
+  .band {
+    margin-top: 54px;
+    background: var(--signal);
+    color: var(--signal-ink);
+  }
+  .band .wrap { padding: 28px 0; display: flex; justify-content: space-between; gap: 24px; align-items: end; }
+  .band p { margin: 0; font-size: clamp(1.6rem, 3vw, 2.35rem); line-height: 1.05; letter-spacing: -0.03em; font-weight: 560; max-width: 18em; }
+  .band a { color: var(--signal-ink); font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 13px; letter-spacing: 0.06em; }
+
+  section { padding: 64px 0 10px; }
+  .kicker {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin: 0 0 10px;
+  }
+  h2 {
+    margin: 0 0 14px;
+    font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+    letter-spacing: -0.04em;
+    line-height: 0.96;
+    font-weight: 560;
+  }
+  .intro { max-width: 40rem; font-size: 1.22rem; margin: 0 0 28px; }
+
+  .jobs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .job {
+    background: var(--card);
+    border: 1px solid var(--line);
+    padding: 22px 20px 18px;
+    min-height: 100%;
+  }
+  .job em {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--signal);
+  }
+  .job h3 { margin: 10px 0 8px; font-size: 1.7rem; letter-spacing: -0.03em; font-weight: 560; }
+  .job p { margin: 0; color: var(--ink); font-size: 1.08rem; }
+  .job ul { margin: 14px 0 0; padding: 0; list-style: none; }
+  .job li {
+    padding: 8px 0;
+    border-top: 1px solid var(--line);
+    font-size: 1.02rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .tile {
+    background: var(--paper);
+    color: var(--paper-ink);
+    padding: 16px 16px 14px;
+    min-height: 148px;
+  }
+  .tile b {
+    display: block;
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .tile span { display: block; font-size: 0.98rem; line-height: 1.35; }
+  .group-label {
+    grid-column: 1 / -1;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 16px;
+  }
+
+  .monday {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .monday ol { list-style: none; margin: 0; padding: 0; }
+  .monday li {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 10px;
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+    font-size: 1.22rem;
+    letter-spacing: -0.02em;
+  }
+  .monday li i {
+    font-style: normal;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--signal);
+    padding-top: 6px;
+  }
+  .paper {
+    background: var(--paper);
+    color: var(--paper-ink);
+    padding: 26px 24px;
+  }
+  .paper h3 { margin: 8px 0 10px; font-size: 1.8rem; letter-spacing: -0.03em; font-style: italic; font-weight: 560; }
+  .paper p { margin: 0 0 10px; font-size: 1.08rem; }
+  .paper .kicker { color: #3d5a12; }
+
+  .close {
+    margin: 56px 0 0;
+    padding: 36px 0 64px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: end;
+    flex-wrap: wrap;
+  }
+  .close h2 { max-width: 12em; }
+  .close a.hire { font-size: 14px; padding: 14px 18px; }
+
+  .svc { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .svc .tile { min-height: 0; }
+  .about p { font-size:1.2rem; margin:0 0 12px; max-width:38rem; }
+  @media (max-width: 860px) { .svc { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) {
+    .bar nav { display: none; }
+    .promises, .jobs, .grid, .monday, .band .wrap { grid-template-columns: 1fr; display: grid; }
+    .promises a, .promises div { border-right: 0; border-bottom: 1px solid var(--line); }
+    .band .wrap { display: grid; }
+    h1 { font-size: clamp(2.8rem, 14vw, 4.4rem); }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="bar">
+      <span>Mahmoud Naoum</span>
+      <nav>
+        <a href="#do">What I do</a>
+        <a href="#posthog">PostHog</a>
+        <a href="#monday">Monday</a>
+        <a href="#services">Also</a>
+        <a href="#about">About</a>
+      </nav>
+      <a class="hire" href="mailto:mahmoudnaoum13@gmail.com?subject=Track%20our%20growth">Hire me</a>
+    </div>
+
+    <header>
+      <h1>I will track<br><em>your growth.</em></h1>
+      <p class="lede">I put PostHog on your product, I keep it healthy, and I use what it captures. The same week, your ad spend sits beside those users, so the meeting is about what grew and what leaked.</p>
+      <div class="promises">
+        <a href="#posthog">
+          <strong>01 Integrate</strong>
+          <span>PostHog on the site, the app, and the events that mean money.</span>
+        </a>
+        <a href="#posthog">
+          <strong>02 Maintain</strong>
+          <span>The tracking stays named, alerted, and true after launch week.</span>
+        </a>
+        <div>
+          <strong>03 Use it</strong>
+          <span>I read the data and bring you the decision, not another login.</span>
+        </div>
+        <a href="#monday">
+          <strong>04 Beside the ads</strong>
+          <span>Google, Meta, LinkedIn, Shopify, and GA4 on the board with it.</span>
+        </a>
+      </div>
+    </header>
+  </div>
+
+  <div class="band">
+    <div class="wrap">
+      <p>You hire one person for the number you argue about on Monday.</p>
+      <a href="mailto:mahmoudnaoum13@gmail.com">mahmoudnaoum13@gmail.com</a>
+    </div>
+  </div>
+
+  <main>
+    <section class="wrap" id="do">
+      <p class="kicker">For a growth team</p>
+      <h2>Three jobs. I do all three.</h2>
+      <p class="intro">PostHog is the product record. The warehouse is the ad record. I connect them, I look after both, and I tell you what they say.</p>
+      <div class="jobs">
+        <article class="job">
+          <em>Integrate</em>
+          <h3>It is on, and it is named.</h3>
+          <p>I install PostHog and define the events your growth actually uses.</p>
+          <ul>
+            <li>SDK on web and app. Autocapture on from day one.</li>
+            <li>Landing, signup, activation, trial, purchase. One name each.</li>
+            <li>People identified. Accounts grouped. UTMs and click ids kept.</li>
+            <li>A reverse proxy, so blockers do not eat the script.</li>
+            <li>Source maps, so an error has a file and a line.</li>
+            <li>Ads, Shopify, Stripe, and GA4 joined through the warehouse.</li>
+          </ul>
+        </article>
+        <article class="job">
+          <em>Maintain</em>
+          <h3>It still means the same thing in month four.</h3>
+          <p>I stay on the pipeline after the install call is over.</p>
+          <ul>
+            <li>Broken or renamed events get fixed before the chart lies.</li>
+            <li>Alerts when activation, purchase, or a funnel step moves.</li>
+            <li>Flags and finished tests get cleaned up.</li>
+            <li>Replay, errors, and log volume stay usable.</li>
+            <li>The taxonomy does not grow three names for one signup.</li>
+            <li>You have a person when a number looks wrong.</li>
+          </ul>
+        </article>
+        <article class="job">
+          <em>Use the data</em>
+          <h3>A read you can act on.</h3>
+          <p>I open PostHog so you do not have to live in it.</p>
+          <ul>
+            <li>Which campaign made users who stayed.</li>
+            <li>Where the funnel breaks, with the replay of that step.</li>
+            <li>Whether the test won, in the language of the meeting.</li>
+            <li>Who to talk to, from the cohort and the survey.</li>
+            <li>Spend, return, and the product event on one board.</li>
+            <li>The leak named before the week is already gone.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap" id="posthog">
+      <p class="kicker">PostHog, the whole product</p>
+      <h2>Everything I will turn on for you.</h2>
+      <p class="intro">Each of these is a tool I integrate, keep, and read. You get the suite, pointed at growth.</p>
+      <div class="grid">
+        <div class="group-label">See what people do</div>
+        <article class="tile"><b>Product analytics</b><span>Trends, funnels, retention, paths, stickiness, and lifecycle. Did they come back, and where did they stop.</span></article>
+        <article class="tile"><b>Web analytics</b><span>Channels and campaigns in real time, without a sampled guess standing in for the truth.</span></article>
+        <article class="tile"><b>Session replay</b><span>The actual session behind a drop, a spike, or a support ticket.</span></article>
+        <article class="tile"><b>Replay Vision</b><span>Recordings scored and summarized, so the useful ones surface and the rest do not eat the week.</span></article>
+        <article class="tile"><b>Heatmaps</b><span>Where people click, and how far they scroll, on the page you are paying to fill.</span></article>
+        <article class="tile"><b>Customer analytics</b><span>The person and the account together: events, flags, and value on one record.</span></article>
+        <article class="tile"><b>Revenue</b><span>Purchase value next to the campaign and the cohort that produced it.</span></article>
+
+        <div class="group-label">Decide what to ship</div>
+        <article class="tile"><b>Experiments</b><span>A/B tests with a readout you can defend in the meeting.</span></article>
+        <article class="tile"><b>Feature flags</b><span>Roll a change out to a slice, target it, and turn it off without a release panic.</span></article>
+        <article class="tile"><b>Surveys</b><span>Ask the people who just dropped, or the people who just paid.</span></article>
+        <article class="tile"><b>Cohorts</b><span>The users who did the thing, ready for a test, a flag, or a message.</span></article>
+        <article class="tile"><b>Correlation</b><span>What actually differs between the people who convert and the people who leave.</span></article>
+        <article class="tile"><b>PostHog AI</b><span>Ask the week a question and get an insight, then save it to the board.</span></article>
+
+        <div class="group-label">Trust the number</div>
+        <article class="tile"><b>Error tracking</b><span>The exception that is killing a step in the funnel.</span></article>
+        <article class="tile"><b>Logs</b><span>What the system did during the session you are looking at.</span></article>
+        <article class="tile"><b>Alerts</b><span>A message when activation or purchase moves, before Monday discovers it.</span></article>
+        <article class="tile"><b>Annotations</b><span>The release and the campaign marked on the chart, so a spike has a cause.</span></article>
+
+        <div class="group-label">Connect it to the rest of the business</div>
+        <article class="tile"><b>Data warehouse</b><span>PostHog joined to ads, Shopify, Stripe, and the clean tables I maintain.</span></article>
+        <article class="tile"><b>CDP</b><span>Sources in, destinations out, transformations in between. One event, the tools you already run.</span></article>
+        <article class="tile"><b>Workflows</b><span>When someone does this, or fails to, the next action fires.</span></article>
+        <article class="tile"><b>Endpoints</b><span>Your board queries PostHog. Nobody exports a CSV to make the slide.</span></article>
+        <article class="tile"><b>SQL</b><span>When the chart is the wrong shape, the query is right there.</span></article>
+        <article class="tile"><b>Dashboards</b><span>The Monday set, shared with the team, rebuilt by the data and not by hand.</span></article>
+
+        <div class="group-label">If the product uses a model</div>
+        <article class="tile"><b>AI observability</b><span>See whether people got a useful answer from the model, and where it failed them.</span></article>
+        <article class="tile"><b>Evaluations</b><span>Score those answers so a bad prompt cannot hide inside a healthy chart.</span></article>
+      </div>
+    </section>
+
+    <section class="wrap" id="monday">
+      <p class="kicker">The board next to it</p>
+      <h2>Growth you can point at.</h2>
+      <div class="monday">
+        <ol>
+          <li><i>01</i><span>A clean ads warehouse. Google, then Meta and LinkedIn. One dataset per brand. A new client is a row, not a new pipeline.</span></li>
+          <li><i>02</i><span>A weekly board. This week against last week. Spend, return, cost per result, purchases. Brand, non-brand, shopping, search, Performance Max.</span></li>
+          <li><i>03</i><span>Shopify and GA4 on that same shape, so revenue and sessions are not a second religion.</span></li>
+          <li><i>04</i><span>PostHog on the board: which spend became an activated user, and which spend bounced.</span></li>
+          <li><i>05</i><span>I maintain both. The table refreshes. The events keep their names. You get the read.</span></li>
+        </ol>
+        <aside class="paper">
+          <p class="kicker">What you open on Monday</p>
+          <h3>The campaign, the user, the money.</h3>
+          <p>Spend from the ad account. The person from PostHog. The purchase from the product. One line from click to retained customer.</p>
+          <p>If a channel has no data yet, it stays off the page. I do not draw a chart for an empty table.</p>
+          <p>Write to me with the product and the ad accounts. I start by reading what you already track.</p>
+        </aside>
+      </div>
+
+      </section>
+
+    <section class="wrap" id="services">
+      <p class="kicker">I also do</p>
+      <h2>A few more things growth teams ask me for.</h2>
+      <div class="svc">
+        <article class="tile"><b>Meta CAPI and server-side tracking</b><span>I check what your pixel is really sending, fix it, and set up the server side so your ad numbers match your shop.</span></article>
+        <article class="tile"><b>AI automation</b><span>Weekly reports, follow-ups, and approvals that run on their own with n8n or a simple AI agent.</span></article>
+        <article class="tile"><b>AI on your own data</b><span>A chat or Retool app that answers questions from your CRM and warehouse, not from the internet.</span></article>
+      </div>
+    </section>
+
+    <section class="wrap about" id="about">
+      <p class="kicker">About</p>
+      <h2>Hi, I'm Mahmoud.</h2>
+      <p>I'm a backend and AI developer working remotely from Egypt, on UK and EU hours. Most of my work is under NDA, so I don't name clients here, but I'm happy to show you how it works on a call.</p>
+      <p>Usually we start with a small fixed-price audit, then go from there. <a href="https://www.linkedin.com/in/mahmoud-naoum-bab38718/">LinkedIn</a></p>
+    </section>
+
+    <section class="wrap">
+      <div class="close">
+        <h2>If you want this running, I will start.</h2>
+        <a class="hire" href="mailto:mahmoudnaoum13@gmail.com?subject=Track%20our%20growth">mahmoudnaoum13@gmail.com</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
