@@ -128,8 +128,15 @@ nav {
   padding: 140px 0 80px;
 }
 
+.hero .container {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
 .hero-content {
-  max-width: 720px;
+  max-width: 100%;
 }
 
 .hero h1 {
@@ -211,18 +218,12 @@ nav {
 
 /* Dashboard Viz */
 .dashboard {
-  position: absolute;
-  right: 5%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 280px;
-  opacity: 0.6;
   animation: float 6s ease-in-out infinite;
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(-50%); }
-  50% { transform: translateY(-55%); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 .chart {
@@ -561,14 +562,14 @@ footer {
   background: rgba(0, 255, 136, 0.1);
 }
 
-/* Reveal Animation */
-.reveal {
+/* Reveal Animation - Progressive enhancement */
+.js-enabled .reveal {
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.8s ease;
 }
 
-.reveal.active {
+.js-enabled .reveal.active {
   opacity: 1;
   transform: translateY(0);
 }
@@ -601,8 +602,14 @@ footer {
     padding: 120px 0 60px;
   }
   
+  .hero .container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
   .dashboard {
-    display: none;
+    max-width: 320px;
+    margin: 0 auto;
   }
   
   .work-grid,
@@ -915,6 +922,9 @@ footer {
 </footer>
 
 <script>
+// Enable JS-specific features
+document.documentElement.classList.add('js-enabled');
+
 // Scroll reveal
 const reveals = document.querySelectorAll('.reveal');
 const revealOnScroll = () => {
