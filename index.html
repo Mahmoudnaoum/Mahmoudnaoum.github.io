@@ -218,20 +218,18 @@ nav {
 
 /* Dashboard Viz */
 .dashboard {
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  width: 100%;
+  max-width: 440px;
+  min-height: 160px;
 }
 
 .chart {
   display: flex;
   align-items: flex-end;
-  gap: 6px;
-  height: 120px;
-  padding: 20px;
+  gap: 8px;
+  height: 140px;
+  min-height: 140px;
+  padding: 24px;
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -240,21 +238,17 @@ nav {
 
 .bar {
   flex: 1;
+  min-width: 20px;
   background: linear-gradient(180deg, var(--accent) 0%, rgba(0, 255, 136, 0.3) 100%);
   border-radius: 3px;
-  animation: grow 1s ease-out backwards;
 }
 
-@keyframes grow {
-  from { height: 0; opacity: 0; }
-}
-
-.bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
-.bar:nth-child(2) { height: 65%; animation-delay: 0.2s; }
-.bar:nth-child(3) { height: 85%; animation-delay: 0.3s; }
-.bar:nth-child(4) { height: 55%; animation-delay: 0.4s; }
-.bar:nth-child(5) { height: 95%; animation-delay: 0.5s; }
-.bar:nth-child(6) { height: 75%; animation-delay: 0.6s; }
+.bar:nth-child(1) { height: 48px; }
+.bar:nth-child(2) { height: 78px; }
+.bar:nth-child(3) { height: 102px; }
+.bar:nth-child(4) { height: 66px; }
+.bar:nth-child(5) { height: 114px; }
+.bar:nth-child(6) { height: 90px; }
 
 /* Sections */
 section {
@@ -562,15 +556,13 @@ footer {
   background: rgba(0, 255, 136, 0.1);
 }
 
-/* Reveal Animation - Progressive enhancement */
+/* Reveal Animation - translateY only, no opacity */
 .js-enabled .reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease;
+  transform: translateY(20px);
+  transition: transform 0.6s ease;
 }
 
 .js-enabled .reveal.active {
-  opacity: 1;
   transform: translateY(0);
 }
 
