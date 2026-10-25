@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ad Spend + Product Data Warehouse — Mahmoud Naoum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --text: #1a1a1a; --text-light: #666; --bg: #fff; --border: #e5e5e5; --hover: #f5f5f5; }
+body { font-family: 'DM Sans', -apple-system, sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 40px; }
+nav { padding: 32px 0; border-bottom: 1px solid var(--border); }
+.nav-content { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-weight: 700; font-size: 18px; color: var(--text); text-decoration: none; }
+.back-link { color: var(--text-light); text-decoration: none; font-size: 15px; transition: color 0.2s; }
+.back-link:hover { color: var(--text); }
+.hero-case { padding: 60px 0 40px; }
+.hero-case h1 { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
+.hero-case .subtitle { font-size: 18px; color: var(--text-light); margin-bottom: 32px; }
+.tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; }
+.tag { font-size: 13px; padding: 6px 12px; background: var(--hover); border-radius: 12px; color: var(--text-light); }
+.visual-large { width: 100%; aspect-ratio: 16/9; border-radius: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin-bottom: 60px; display: flex; align-items: center; justify-content: center; }
+.section { margin-bottom: 48px; }
+.section h2 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+.section p { font-size: 16px; line-height: 1.7; color: var(--text-light); }
+footer { padding: 60px 0 40px; border-top: 1px solid var(--border); margin-top: 80px; }
+.footer-link { color: var(--text); text-decoration: none; font-weight: 500; }
+@media (max-width: 768px) { .container { padding: 0 24px; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="nav-content">
+      <a href="/" class="logo">Mahmoud Naoum</a>
+      <a href="/" class="back-link">← Back to work</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero-case">
+  <div class="container">
+    <h1>Ad Spend + Product Data Warehouse</h1>
+    <p class="subtitle">A UK Growth Agency</p>
+    <div class="tags">
+      <span class="tag">BigQuery</span>
+      <span class="tag">Google Ads</span>
+      <span class="tag">Meta</span>
+      <span class="tag">Shopify</span>
+      <span class="tag">GA4</span>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="visual-large">
+    <svg width="240" height="160" viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="30" y="90" width="30" height="50" fill="white" opacity="0.9" rx="3"/>
+      <rect x="75" y="65" width="30" height="75" fill="white" opacity="0.9" rx="3"/>
+      <rect x="120" y="40" width="30" height="100" fill="white" opacity="0.9" rx="3"/>
+      <rect x="165" y="55" width="30" height="85" fill="white" opacity="0.9" rx="3"/>
+      <line x1="45" y1="90" x2="90" y2="65" stroke="white" stroke-width="3" opacity="0.7"/>
+      <line x1="90" y1="65" x2="135" y2="40" stroke="white" stroke-width="3" opacity="0.7"/>
+      <line x1="135" y1="40" x2="180" y2="55" stroke="white" stroke-width="3" opacity="0.7"/>
+    </svg>
+  </div>
+
+  <div class="section">
+    <h2>Problem</h2>
+    <p>A growth agency was running reports for their clients from five different places: Google Ads, Meta Ads Manager, LinkedIn Campaign Manager, Shopify admin, and GA4. Every Monday, someone spent hours exporting CSVs, copying numbers into a deck, and trying to make the metrics line up across platforms.</p>
+  </div>
+
+  <div class="section">
+    <h2>What I Built</h2>
+    <p>I built a BigQuery data warehouse that pulls from all five sources on a schedule, joins them by client and campaign, and outputs one clean weekly board. Google Ads and Meta come in via API, Shopify via webhook, LinkedIn and GA4 through their connectors. Each client gets their own dataset. Spend, clicks, conversions, and revenue all in one query.</p>
+  </div>
+
+  <div class="section">
+    <h2>Result</h2>
+    <p>One weekly board instead of five exports across three tools. The team opens one link on Monday morning and the numbers are already there, matched and ready. When a new client starts, they get added as a row in the config table and the pipeline picks them up automatically.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <a href="/" class="footer-link">← Back to all work</a>
+  </div>
+</footer>
+
+</body>
+</html>
