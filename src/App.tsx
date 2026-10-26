@@ -281,10 +281,10 @@ function App() {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-yellow-500/15 border border-yellow-500/40 text-foreground shadow-sm mb-8"
             >
               <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-              <span className="text-sm font-medium">Top Rated Plus on Upwork</span>
+              <span className="text-sm md:text-base font-semibold tracking-wide">Top Rated Plus on Upwork</span>
             </motion.div>
 
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
@@ -302,7 +302,7 @@ function App() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button size="lg" className="text-lg" asChild>
                   <a href="#pricing">
-                    View Services <ArrowRight className="w-5 h-5" />
+                    <span className="inline-flex items-center gap-2 whitespace-nowrap">View Services <ArrowRight className="w-5 h-5 shrink-0" /></span>
                   </a>
                 </Button>
               </motion.div>
@@ -379,7 +379,7 @@ function App() {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Featured Work</h2>
@@ -394,8 +394,8 @@ function App() {
                 key={study.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ delay: Math.min(i * 0.05, 0.2), duration: 0.35 }}
                 whileHover={{ y: -4 }}
                 onClick={() => setSelectedCase(study.id)}
                 className={cn(
@@ -442,7 +442,7 @@ function App() {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Simple Pricing</h2>
@@ -459,8 +459,8 @@ function App() {
                 key={plan.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ delay: Math.min(i * 0.05, 0.2), duration: 0.35 }}
                 whileHover={{ scale: 1.02 }}
                 className="relative"
               >
@@ -496,7 +496,7 @@ function App() {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">FAQ</h2>
@@ -512,8 +512,8 @@ function App() {
                 key={i}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ delay: Math.min(i * 0.05, 0.2), duration: 0.35 }}
               >
                 <Card className="p-6">
                   <h3 className="font-semibold mb-2 flex items-center gap-2">
@@ -534,7 +534,7 @@ function App() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to get started?</h2>
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
