@@ -52,24 +52,20 @@ type Shot = { src: string; w: number; h: number; alt: string; caption: string }
 type Project = { id: string; title: string; line: string; client: string; tags: string[]; Visual: () => React.ReactElement; thumb?: Shot; shots?: Shot[]; problem: string; built: string; result: string }
 const projects: Project[] = [
   { id: 'warehouse', title: 'Ad-spend warehouse + Retool dashboard', line: 'One weekly board instead of five exports.', client: 'A UK e-commerce brand, via a growth agency', tags: ['BigQuery', 'Retool', 'Google Ads', 'Meta', 'LinkedIn', 'Shopify', 'GA4'], Visual: Bars,
-    thumb: { src: '/kpis-chart.webp', w: 1254, h: 494, alt: 'Retool dashboard with filters, KPI cards and a spend vs CPA chart', caption: 'Filters, week-over-week KPI cards and the spend vs CPA chart.' },
-    shots: [
-      { src: '/kpis-chart.webp', w: 1254, h: 494, alt: 'KPI cards and spend vs CPA chart', caption: 'Channel, account, market and week filters; KPI cards vs previous week; spend vs CPA by week.' },
-      { src: '/weekly-table.webp', w: 1240, h: 332, alt: 'Weekly performance table', caption: 'Weekly table with every metric the team reviews.' },
-      { src: '/campaigns.webp', w: 1240, h: 392, alt: 'Campaign breakdown table', caption: 'Campaign and ad-group breakdowns for the selected period.' },
-    ],
+    thumb: { src: '/mock-dash.webp', w: 1600, h: 1125, alt: 'Retool Google Ads dashboard with filters, KPI cards, spend vs CPA chart and weekly table', caption: 'Filters, KPI cards vs previous week, spend vs CPA chart and the weekly table.' },
+    shots: [{ src: '/mock-dash.webp', w: 1600, h: 1125, alt: 'Retool Google Ads dashboard with filters, KPI cards, spend vs CPA chart and weekly table', caption: 'Filters, KPI cards vs previous week, spend vs CPA chart and the weekly table.' }, { src: '/mock-camp.webp', w: 1600, h: 950, alt: 'Campaign and network breakdown tables', caption: 'Campaign, network and ad-group breakdowns for the selected period.' }],
     problem: 'Spend and revenue lived in five different tools. Every Monday someone stitched exports together by hand, and the numbers rarely matched across channels.',
     built: 'Daily pipelines from Google Ads, Meta, LinkedIn, Shopify and GA4 into BigQuery, modelled raw → clean → weekly KPI views. On top, a Retool dashboard with channel, account, market and week filters, KPI cards for spend, ROAS, conversions and CPA vs the previous week, a spend vs CPA chart, a weekly table and campaign / ad-group breakdowns. Weekly is the default view on purpose: daily ad data is too noisy to act on.',
     result: 'One weekly board instead of five exports. The team now spots quickly when spend rises but efficiency drops, and acts on it the same week.' },
-  { id: 'posthog', title: 'PostHog product analytics', line: 'Clean events, working funnels, useful alerts.', client: 'An e-commerce brand', tags: ['PostHog', 'Tracking plan', 'Funnels'], Visual: Funnel,
+  { id: 'posthog', thumb: { src: '/mock-posthog.webp', w: 1600, h: 875, alt: 'Product analytics purchase funnel and live server-side events', caption: 'Purchase funnel with alerting, and live web + server-side events.' }, shots: [{ src: '/mock-posthog.webp', w: 1600, h: 875, alt: 'Product analytics purchase funnel and live server-side events', caption: 'Purchase funnel with alerting, and live web + server-side events.' }], title: 'PostHog product analytics', line: 'Clean events, working funnels, useful alerts.', client: 'An e-commerce brand', tags: ['PostHog', 'Tracking plan', 'Funnels'], Visual: Funnel,
     problem: 'Events were inconsistently named and many were missing, so funnels were unreliable and nobody trusted conversion numbers. Ad-blockers also hid part of the traffic.',
     built: 'A tracking plan, a clean PostHog implementation with server-side events for checkout and purchase, consistent naming and properties, and funnels plus alerts for the key purchase steps. Documented so the team can add events without breaking things.',
     result: 'Reliable funnels the team uses weekly, and alerts that catch tracking breaks before they hit reports.' },
-  { id: 'brief', title: 'AI weekly brief agent', line: 'A Monday summary written for you.', client: 'A SaaS company', tags: ['n8n', 'Claude', 'Slack'], Visual: Doc,
+  { id: 'brief', thumb: { src: '/mock-brief.webp', w: 1600, h: 500, alt: 'Slack weekly brief with KPI highlights and what changed', caption: 'The Monday brief in Slack: KPIs, what changed, and what to look at.' }, shots: [{ src: '/mock-brief.webp', w: 1600, h: 500, alt: 'Slack weekly brief with KPI highlights and what changed', caption: 'The Monday brief in Slack: KPIs, what changed, and what to look at.' }], title: 'AI weekly brief agent', line: 'A Monday summary written for you.', client: 'A SaaS company', tags: ['n8n', 'Claude', 'Slack'], Visual: Doc,
     problem: 'Leadership wanted a weekly picture of the business, but compiling it took an analyst most of a morning.',
     built: 'An n8n workflow that pulls key metrics, asks Claude to write a short plain-English brief highlighting what changed and why it matters, and posts it to Slack. The prompt is grounded in the numbers so it explains rather than invents.',
     result: 'A consistent brief lands every Monday with no manual work, and questions get asked earlier in the week.' },
-  { id: 'retool', title: 'Retool AI assistant', line: 'Ask your own data in plain English.', client: 'A growth agency', tags: ['Retool', 'RAG', 'SQL'], Visual: Chat,
+  { id: 'retool', thumb: { src: '/mock-assistant.webp', w: 1600, h: 512, alt: 'Retool chat assistant answering a question about campaign ROAS', caption: 'A plain-English question answered from the warehouse, with its source shown.' }, shots: [{ src: '/mock-assistant.webp', w: 1600, h: 512, alt: 'Retool chat assistant answering a question about campaign ROAS', caption: 'A plain-English question answered from the warehouse, with its source shown.' }], title: 'Retool AI assistant', line: 'Ask your own data in plain English.', client: 'A growth agency', tags: ['Retool', 'RAG', 'SQL'], Visual: Chat,
     problem: 'Account managers needed answers from internal data and docs but had to wait for an analyst to write queries.',
     built: 'A Retool app with an AI assistant using retrieval over internal docs and safe, read-only SQL over the warehouse. Answers show the query or source used, so people can check them.',
     result: 'Self-serve answers in seconds, and analysts freed up for deeper work.' },
@@ -105,7 +101,7 @@ function CaseDialog({ p, onClose }: { p: Project; onClose: () => void }) {
         {p.shots && <div className="mt-8 space-y-6">{p.shots.map(sh => (
           <figure key={sh.src}><img src={sh.src} width={sh.w} height={sh.h} alt={sh.alt} loading="lazy" decoding="async" className="h-auto w-full rounded-lg border border-neutral-200" />
             <figcaption className="mt-2 text-sm text-neutral-500">{sh.caption}</figcaption></figure>))}
-          <p className="text-xs text-neutral-400">Client names and money figures blurred for NDA.</p></div>}
+          <p className="text-xs text-neutral-400">Screens recreated with sample data (client work under NDA).</p></div>}
         <div className="mt-6 flex flex-wrap gap-2">{p.tags.map(t => <Badge key={t}>{t}</Badge>)}</div>
       </div>
     </div>
@@ -117,6 +113,9 @@ const nav = [['Work', '#work'], ['Services', '#services'], ['About', '#about'], 
 export default function App() {
   const [open, setOpen] = useState<Project | null>(null)
   const [menu, setMenu] = useState(false)
+  useEffect(() => {
+    const m = location.hash.match(/^#case=(\w+)/); const p = m && projects.find(x => x.id === m[1]); if (p) setOpen(p)
+  }, [])
   return (
     <div className="mx-auto max-w-5xl px-5 sm:px-8">
       <header className="flex items-center justify-between py-6">
@@ -142,8 +141,8 @@ export default function App() {
           <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2">
             {projects.map(p => (
               <Card key={p.id} onClick={() => setOpen(p)} aria-label={`Open case study: ${p.title}`}>
-                <div className={cn('aspect-[5/3] overflow-hidden rounded-2xl bg-neutral-100 transition-colors group-hover:bg-neutral-200/70', p.thumb ? 'flex items-center p-3 sm:p-4' : 'p-8')}>
-                  {p.thumb ? <img src={p.thumb.src} width={p.thumb.w} height={p.thumb.h} alt={p.thumb.alt} loading="lazy" decoding="async" className="h-auto w-full rounded-lg border border-neutral-200 bg-white" /> : <p.Visual />}
+                <div className={cn('aspect-[5/3] overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100 transition-colors group-hover:bg-neutral-200/70', p.thumb ? 'p-0' : 'p-8')}>
+                  {p.thumb ? <img src={p.thumb.src} width={p.thumb.w} height={p.thumb.h} alt={p.thumb.alt} loading="lazy" decoding="async" className="h-full w-full object-cover object-left-top" /> : <p.Visual />}
                 </div>
                 <h3 className="mt-4 flex items-center gap-1 font-medium">{p.title}<ArrowUpRight className="h-4 w-4 text-neutral-400 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></h3>
                 <p className="mt-1 text-neutral-600">{p.line}</p>
