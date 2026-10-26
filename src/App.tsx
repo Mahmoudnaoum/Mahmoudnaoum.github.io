@@ -278,9 +278,9 @@ function App() {
             className="max-w-4xl mx-auto text-center"
           >
             <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2 }}
+              initial={{ y: -6 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.3 }}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-yellow-500/15 border border-yellow-500/40 text-foreground shadow-sm mb-8"
             >
               <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
@@ -377,8 +377,8 @@ function App() {
       <section id="work" className="py-24">
         <div className="container px-4">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ y: 12 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
             className="text-center mb-16"
           >
@@ -392,8 +392,8 @@ function App() {
             {caseStudies.map((study, i) => (
               <motion.div
                 key={study.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 16 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ delay: Math.min(i * 0.05, 0.2), duration: 0.35 }}
                 whileHover={{ y: -4 }}
@@ -440,8 +440,8 @@ function App() {
       <section id="pricing" className="py-24 bg-muted/30">
         <div className="container px-4">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ y: 12 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
             className="text-center mb-16"
           >
@@ -457,8 +457,8 @@ function App() {
             ].map((plan, i) => (
               <motion.div
                 key={plan.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 16 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ delay: Math.min(i * 0.05, 0.2), duration: 0.35 }}
                 whileHover={{ scale: 1.02 }}
@@ -494,8 +494,8 @@ function App() {
       <section id="faq" className="py-24">
         <div className="container px-4 max-w-3xl mx-auto">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ y: 12 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
             className="text-center mb-16"
           >
@@ -510,8 +510,8 @@ function App() {
             ].map((faq, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 10 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ delay: Math.min(i * 0.05, 0.2), duration: 0.35 }}
               >
