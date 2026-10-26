@@ -272,8 +272,8 @@ function App() {
         
         <div className="container relative px-4 py-24 md:py-32">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 12 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
             className="max-w-4xl mx-auto text-center"
           >
@@ -316,8 +316,8 @@ function App() {
             {/* Trust Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ y: 12 }}
+                animate={{ y: 0 }}
                 transition={{ delay: 0.4 }}
                 className="text-center"
               >
@@ -327,8 +327,8 @@ function App() {
                 <div className="text-sm text-muted-foreground">Earned on Upwork</div>
               </motion.div>
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ y: 12 }}
+                animate={{ y: 0 }}
                 transition={{ delay: 0.5 }}
                 className="text-center"
               >
@@ -339,8 +339,8 @@ function App() {
                 <div className="text-sm text-muted-foreground">Working Hours</div>
               </motion.div>
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ y: 12 }}
+                animate={{ y: 0 }}
                 transition={{ delay: 0.6 }}
                 className="text-center"
               >
