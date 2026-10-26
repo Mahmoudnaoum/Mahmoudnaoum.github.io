@@ -48,23 +48,30 @@ const Chat = () => (
   </svg>
 )
 
-type Project = { id: string; title: string; line: string; client: string; tags: string[]; Visual: () => React.ReactElement; problem: string; built: string; result: string }
+type Shot = { src: string; w: number; h: number; alt: string; caption: string }
+type Project = { id: string; title: string; line: string; client: string; tags: string[]; Visual: () => React.ReactElement; thumb?: Shot; shots?: Shot[]; problem: string; built: string; result: string }
 const projects: Project[] = [
-  { id: 'warehouse', title: 'Ad-spend data warehouse', line: 'One weekly board instead of five exports.', client: 'A UK growth agency', tags: ['BigQuery', 'Meta Ads', 'Google Ads', 'Shopify'], Visual: Bars,
-    problem: 'Spend and revenue lived in five different tools. Every Monday someone stitched CSVs together by hand, and the numbers rarely matched.',
-    built: 'Automated pipelines loading Meta, Google Ads and Shopify data into BigQuery, with modelled tables for spend, orders and blended ROAS.',
-    result: 'One trusted weekly dashboard. Reporting time dropped from hours to minutes, and the team stopped arguing about which number is right.' },
+  { id: 'warehouse', title: 'Ad-spend warehouse + Retool dashboard', line: 'One weekly board instead of five exports.', client: 'A UK e-commerce brand, via a growth agency', tags: ['BigQuery', 'Retool', 'Google Ads', 'Meta', 'LinkedIn', 'Shopify', 'GA4'], Visual: Bars,
+    thumb: { src: '/kpis-chart.webp', w: 1254, h: 494, alt: 'Retool dashboard with filters, KPI cards and a spend vs CPA chart', caption: 'Filters, week-over-week KPI cards and the spend vs CPA chart.' },
+    shots: [
+      { src: '/kpis-chart.webp', w: 1254, h: 494, alt: 'KPI cards and spend vs CPA chart', caption: 'Channel, account, market and week filters; KPI cards vs previous week; spend vs CPA by week.' },
+      { src: '/weekly-table.webp', w: 1240, h: 332, alt: 'Weekly performance table', caption: 'Weekly table with every metric the team reviews.' },
+      { src: '/campaigns.webp', w: 1240, h: 392, alt: 'Campaign breakdown table', caption: 'Campaign and ad-group breakdowns for the selected period.' },
+    ],
+    problem: 'Spend and revenue lived in five different tools. Every Monday someone stitched exports together by hand, and the numbers rarely matched across channels.',
+    built: 'Daily pipelines from Google Ads, Meta, LinkedIn, Shopify and GA4 into BigQuery, modelled raw → clean → weekly KPI views. On top, a Retool dashboard with channel, account, market and week filters, KPI cards for spend, ROAS, conversions and CPA vs the previous week, a spend vs CPA chart, a weekly table and campaign / ad-group breakdowns. Weekly is the default view on purpose: daily ad data is too noisy to act on.',
+    result: 'One weekly board instead of five exports. The team now spots quickly when spend rises but efficiency drops, and acts on it the same week.' },
   { id: 'posthog', title: 'PostHog product analytics', line: 'Clean events, working funnels, useful alerts.', client: 'An e-commerce brand', tags: ['PostHog', 'Tracking plan', 'Funnels'], Visual: Funnel,
-    problem: 'Events were inconsistently named and half were missing, so funnels were unreliable and nobody trusted conversion numbers.',
-    built: 'A tracking plan, a clean PostHog implementation with server-side events, and funnels plus alerts for the key purchase steps.',
+    problem: 'Events were inconsistently named and many were missing, so funnels were unreliable and nobody trusted conversion numbers. Ad-blockers also hid part of the traffic.',
+    built: 'A tracking plan, a clean PostHog implementation with server-side events for checkout and purchase, consistent naming and properties, and funnels plus alerts for the key purchase steps. Documented so the team can add events without breaking things.',
     result: 'Reliable funnels the team uses weekly, and alerts that catch tracking breaks before they hit reports.' },
   { id: 'brief', title: 'AI weekly brief agent', line: 'A Monday summary written for you.', client: 'A SaaS company', tags: ['n8n', 'Claude', 'Slack'], Visual: Doc,
     problem: 'Leadership wanted a weekly picture of the business, but compiling it took an analyst most of a morning.',
-    built: 'An n8n workflow that pulls key metrics, asks Claude to write a short plain-English brief, and posts it to Slack.',
+    built: 'An n8n workflow that pulls key metrics, asks Claude to write a short plain-English brief highlighting what changed and why it matters, and posts it to Slack. The prompt is grounded in the numbers so it explains rather than invents.',
     result: 'A consistent brief lands every Monday with no manual work, and questions get asked earlier in the week.' },
   { id: 'retool', title: 'Retool AI assistant', line: 'Ask your own data in plain English.', client: 'A growth agency', tags: ['Retool', 'RAG', 'SQL'], Visual: Chat,
     problem: 'Account managers needed answers from internal data and docs but had to wait for an analyst to write queries.',
-    built: 'A Retool app with an AI assistant using retrieval over internal docs and safe, read-only SQL over the warehouse.',
+    built: 'A Retool app with an AI assistant using retrieval over internal docs and safe, read-only SQL over the warehouse. Answers show the query or source used, so people can check them.',
     result: 'Self-serve answers in seconds, and analysts freed up for deeper work.' },
 ]
 
@@ -82,7 +89,7 @@ function CaseDialog({ p, onClose }: { p: Project; onClose: () => void }) {
   }, [onClose])
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-neutral-900/30 sm:items-center sm:p-6" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="case-title">
-      <div className="rise max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-t-2xl bg-white p-6 sm:rounded-2xl sm:p-8" onClick={e => e.stopPropagation()}>
+      <div className="rise max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-t-2xl bg-white p-6 sm:rounded-2xl sm:p-8" onClick={e => e.stopPropagation()}>
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-sm text-neutral-500">{p.client}</p>
@@ -95,6 +102,10 @@ function CaseDialog({ p, onClose }: { p: Project; onClose: () => void }) {
             <div key={k}><dt className="text-sm font-medium text-neutral-500">{k}</dt><dd className="mt-1 text-neutral-800">{v}</dd></div>
           ))}
         </dl>
+        {p.shots && <div className="mt-8 space-y-6">{p.shots.map(sh => (
+          <figure key={sh.src}><img src={sh.src} width={sh.w} height={sh.h} alt={sh.alt} loading="lazy" decoding="async" className="h-auto w-full rounded-lg border border-neutral-200" />
+            <figcaption className="mt-2 text-sm text-neutral-500">{sh.caption}</figcaption></figure>))}
+          <p className="text-xs text-neutral-400">Client names and money figures blurred for NDA.</p></div>}
         <div className="mt-6 flex flex-wrap gap-2">{p.tags.map(t => <Badge key={t}>{t}</Badge>)}</div>
       </div>
     </div>
@@ -131,7 +142,9 @@ export default function App() {
           <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2">
             {projects.map(p => (
               <Card key={p.id} onClick={() => setOpen(p)} aria-label={`Open case study: ${p.title}`}>
-                <div className="aspect-[5/3] overflow-hidden rounded-2xl bg-neutral-100 p-8 transition-colors group-hover:bg-neutral-200/70"><p.Visual /></div>
+                <div className={cn('aspect-[5/3] overflow-hidden rounded-2xl bg-neutral-100 transition-colors group-hover:bg-neutral-200/70', p.thumb ? 'flex items-center p-3 sm:p-4' : 'p-8')}>
+                  {p.thumb ? <img src={p.thumb.src} width={p.thumb.w} height={p.thumb.h} alt={p.thumb.alt} loading="lazy" decoding="async" className="h-auto w-full rounded-lg border border-neutral-200 bg-white" /> : <p.Visual />}
+                </div>
                 <h3 className="mt-4 flex items-center gap-1 font-medium">{p.title}<ArrowUpRight className="h-4 w-4 text-neutral-400 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></h3>
                 <p className="mt-1 text-neutral-600">{p.line}</p>
               </Card>
